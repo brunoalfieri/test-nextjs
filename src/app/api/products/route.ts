@@ -1,43 +1,4 @@
-import { createProductSchema } from '@/app/schemas/products';
-import { NextRequest, NextResponse } from 'next/server';
-import { z } from 'zod';
-import { prisma } from '../prisma';
+import { createProduct } from './create';
+import { tableProducts } from './table';
 
-export async function POST(request: NextRequest) {
-  try { 
-    const body = await request.json();
-    const parsedBody = createProductSchema.parse(body);
-
-    await prisma.products.create({
-      data: {
-        ...parsedBody,
-        category: {
-          connectOrCreate: {
-            create: { name: parsedBody.category.name },
-            where: {
-              id: parsedBody.category.id,
-            },
-          },
-        },
-      },
-    });
-    return NextResponse.json({ status: 200, message: 'Criou com sucesso ?' });
-  } catch (error) {
-    if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        {
-          message: 'Data validation error',
-          error: error.errors,
-        },
-        { status: 400 }
-      );
-    }
-
-    return NextResponse.json(
-      {
-        message: 'Error creating product and category',
-      },
-      { status: 500 }
-    );
-  }
-}
+export { tableProducts as GET, createProduct as POST };
