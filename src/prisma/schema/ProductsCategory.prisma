@@ -1,0 +1,7 @@
+model ProductsCategory {
+  id Int @id @default(autoincrement())
+  name String
+  products Products[]
+  createAt DateTime @default(now())
+  updatedAt DateTime
+}

@@ -1,0 +1,11 @@
+model Products {
+  id   Int    @id @default(autoincrement())
+  name String
+  categoryId Int
+  category ProductsCategory @relation(fields: [categoryId], references: [id])
+  price Int
+  description String
+  image String
+  createAt DateTime @default(now())
+  updatedAt DateTime
+}
