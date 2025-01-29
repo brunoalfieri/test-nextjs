@@ -1,4 +1,4 @@
-import { updateProductSchema } from '@/app/schemas/products';
+import { updateProductSchema } from '@/service/actions/product/schema';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '../../prisma';

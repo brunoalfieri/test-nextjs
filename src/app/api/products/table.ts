@@ -50,17 +50,18 @@ export async function tableProducts(request: NextRequest) {
     const totalCount = products.length;
 
     const totalPages = Math.ceil(totalCount / pageSize);
-
-    return NextResponse.json({
-      status: 200,
-      data: products,
-      pagination: {
-        page,
-        pageSize,
-        totalCount,
-        totalPages,
+    return NextResponse.json(
+      {
+        result: products,
+        pagination: {
+          page,
+          pageSize,
+          totalCount,
+          totalPages,
+        },
       },
-    });
+      { status: 200 }
+    );
   } catch (error) {
     console.error('Error fetching products:', error);
     return NextResponse.json(
