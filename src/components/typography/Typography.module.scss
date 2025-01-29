@@ -1,0 +1,74 @@
+.typography {
+  &[data-variant='headline'] {
+    @apply leading-snug;
+    letter-spacing: -1px;
+    &[data-size='lg'] {
+      @apply lg:text-5xl text-4xl;
+    }
+    &[data-size='md'] {
+      @apply lg:text-4xl text-3xl;
+    }
+    &[data-size='sm'] {
+      @apply lg:text-3xl  text-2xl;
+    }
+  }
+  &[data-variant='title'] {
+    @apply leading-tight;
+    &[data-size='lg'] {
+      @apply lg:text-2xl text-xl;
+      letter-spacing: 0px;
+    }
+    &[data-size='md'] {
+      @apply text-xl;
+      letter-spacing: 0.02px;
+    }
+    &[data-size='sm'] {
+      @apply text-lg;
+      letter-spacing: 0.05px;
+    }
+  }
+  &[data-variant='body'] {
+    @apply leading-tight;
+    &[data-size='lg'] {
+      @apply lg:text-xl text-lg;
+      letter-spacing: 0px;
+    }
+    &[data-size='md'] {
+      @apply text-lg;
+      letter-spacing: 0px;
+    }
+    &[data-size='sm'] {
+      @apply text-base;
+      letter-spacing: 0px;
+    }
+  }
+  &[data-variant='label'] {
+    &[data-size='lg'] {
+      @apply text-base;
+      letter-spacing: 0px;
+    }
+    &[data-size='md'] {
+      @apply text-sm;
+      letter-spacing: 0.02px;
+    }
+    &[data-size='sm'] {
+      @apply text-xs;
+      letter-spacing: 0.05px;
+    }
+  }
+  &[data-weight='regular'] {
+    @apply font-normal;
+  }
+  &[data-weight='medium'] {
+    @apply font-medium;
+  }
+  &[data-weight='semibold'] {
+    @apply font-semibold;
+  }
+  &[data-weight='bold'] {
+    @apply font-bold;
+  }
+  &[data-weight='light'] {
+    @apply font-light;
+  }
+}
