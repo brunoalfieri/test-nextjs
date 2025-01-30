@@ -1,4 +1,4 @@
-import { useServiceProductTable } from './table';
+import { _serviceProductsTable } from './table';
 
 export enum EProductAction {
   'PRODUCTS_TABLE' = 'PRODUCTS_TABLE',
@@ -9,6 +9,6 @@ export enum EProductAction {
   'PRODUCT_DELETE' = 'PRODUCT_DELETE',
 }
 
-export const useServiceProduct = {
-  table: useServiceProductTable,
+export const productsService = {
+  table: _serviceProductsTable,
 };
