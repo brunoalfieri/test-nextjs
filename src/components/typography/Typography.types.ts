@@ -2,7 +2,6 @@ import { SIZE, WEIGHTS } from '@/types/global';
 import React from 'react';
 
 export enum TYPOGRAPHY_VARIANTS {
-  'HEADLINE' = 'headline',
   'TITLE' = 'title',
   'BODY' = 'body',
   'LABEL' = 'label',
