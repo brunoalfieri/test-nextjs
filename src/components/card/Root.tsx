@@ -49,12 +49,12 @@ export function CardRoot<T extends keyof React.JSX.IntrinsicElements>({
     <Element
       {...props}
       className={twMerge(
-        'w-full shadow-lg rounded-md grid grid-cols-1 grid-rows-[max-content,1fr] overflow-hidden hover:shadow-zinc-300 transition-all',
+        'w-full shadow-lg rounded-md grid grid-cols-1 grid-rows-[max-content,1fr] overflow-hidden hover:shadow-zinc-300 transition-all h-full',
         props.className
       )}
     >
       {CImage}
-      <div className="p-4 flex flex-col relative pb-10">
+      <div className="p-4 flex flex-col relative pb-10 h-60">
         {CTitle}
         {CDescription}
         {CPrice}

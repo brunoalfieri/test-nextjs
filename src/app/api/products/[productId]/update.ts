@@ -1,10 +1,10 @@
-import { updateProductSchema } from '@/service/actions/product/schema';
+import { productUpdateSchema } from '@/service/actions/products/schema';
 import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '../../prisma';
-import { readProduct } from './read';
+import { productRead } from './read';
 
-export async function updateProduct(
+export async function productUpdate(
   request: NextRequest,
   { params }: { params: { productId: string } }
 ) {
@@ -12,9 +12,9 @@ export async function updateProduct(
     const productId = parseInt(params.productId, 10);
 
     const body = await request.json();
-    const parsedBody = updateProductSchema.parse(body);
+    const parsedBody = productUpdateSchema.parse(body);
 
-    await readProduct(request, { params });
+    await productRead(request, { params });
 
     const updatedProduct = await prisma.products.update({
       where: { id: productId },
@@ -22,9 +22,9 @@ export async function updateProduct(
         ...parsedBody,
         category: {
           connectOrCreate: {
-            create: { name: parsedBody.category.name },
+            create: { name: parsedBody.category.label },
             where: {
-              id: parsedBody.category.id,
+              id: parsedBody.category.id ?? undefined,
             },
           },
         },

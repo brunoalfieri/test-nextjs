@@ -2,7 +2,7 @@ import { Prisma } from '@prisma/client';
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '../prisma';
 
-export async function tableProducts(request: NextRequest) {
+export async function productsTable(request: NextRequest) {
   try {
     const search = request.nextUrl.searchParams.get('search') || '';
     const page = parseInt(request.nextUrl.searchParams.get('page') || '1', 10);

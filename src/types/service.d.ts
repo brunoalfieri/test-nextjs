@@ -14,7 +14,7 @@ export type IServiceFunctionParams<T = object> = {
   context?: QueryFunctionContext;
 } & T;
 
-export interface IServiceQuerySearchResponseAPI<T> {
+export interface IServiceResponseAPI<T> {
   result: T[];
 }
 

@@ -2,7 +2,7 @@ import _ from 'lodash';
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '../../prisma';
 
-export async function readProduct(
+export async function productRead(
   request: NextRequest,
   { params }: { params: { productId: string } }
 ) {

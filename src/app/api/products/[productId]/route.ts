@@ -1,9 +1,5 @@
-import { deleteProductUnique } from './delete';
-import { readProduct } from './read';
-import { updateProduct } from './update';
+import { productDelete } from './delete';
+import { productRead } from './read';
+import { productUpdate } from './update';
 
-export {
-  deleteProductUnique as DELETE,
-  readProduct as GET,
-  updateProduct as PUT,
-};
+export { productDelete as DELETE, productRead as GET, productUpdate as PUT };

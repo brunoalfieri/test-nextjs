@@ -1,4 +1,4 @@
-import { createProduct } from './create';
-import { tableProducts } from './table';
+import { productCreate } from './create';
+import { productsTable } from './table';
 
-export { tableProducts as GET, createProduct as POST };
+export { productsTable as GET, productCreate as POST };

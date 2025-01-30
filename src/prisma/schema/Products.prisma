@@ -3,7 +3,7 @@ model Products {
   name String
   category ProductsCategory @relation(fields: [categoryId], references: [id])
   categoryId Int
-  price BigInt
+  price Int
   description String
   image String
   createdAt DateTime @default(now())

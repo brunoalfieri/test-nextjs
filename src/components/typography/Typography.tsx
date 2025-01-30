@@ -33,16 +33,6 @@ function TypographyDefault<
 }
 
 export const Typography = {
-  Headline: <E extends keyof React.JSX.IntrinsicElements>(
-    props: Omit<TypographyProps<E, TYPOGRAPHY_VARIANTS.HEADLINE>, 'variant'>
-  ) =>
-    // @ts-expect-error: "as" is required and exists
-    TypographyDefault({
-      size: SIZE.MD,
-      ...props,
-      as: props.as,
-      variant: TYPOGRAPHY_VARIANTS.HEADLINE,
-    }),
   Title: <E extends keyof React.JSX.IntrinsicElements>(
     props: Omit<TypographyProps<E, TYPOGRAPHY_VARIANTS.TITLE>, 'variant'>
   ) =>
