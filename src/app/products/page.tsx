@@ -4,11 +4,20 @@ import { CardCategory } from '@/components/card/Category';
 import { CardDescription } from '@/components/card/Description';
 import { CardPrice } from '@/components/card/Price';
 import { CardTitle } from '@/components/card/Title';
-import { useServiceProduct } from '@/service/actions/product';
+import { EProductAction, productsService } from '@/service/actions/products';
+import { useQuery } from '@tanstack/react-query';
 
 export default function Products() {
-  const { isLoading, data, error } = useServiceProduct.table({
-    params: { page: 1, pageSize: 10 },
+  const { isLoading, data } = useQuery({
+    queryKey: [EProductAction.PRODUCTS_TABLE],
+    queryFn: (context) =>
+      productsService.table({
+        context,
+        params: {
+          page: 1,
+          pageSize: 10,
+        },
+      }),
   });
 
   if (isLoading) return <div>Loading</div>;
