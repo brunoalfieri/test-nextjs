@@ -31,7 +31,7 @@ export function ProductForm(props: { initialProduct?: ProductReadSchema }) {
       ...props.initialProduct,
     },
   });
-  console.log('AAA', methods.formState.errors);
+
   const productCreate = useMutation({
     mutationKey: [EProductAction.PRODUCT_CREATE],
     mutationFn: productsService.create,
@@ -54,7 +54,7 @@ export function ProductForm(props: { initialProduct?: ProductReadSchema }) {
     <FormProvider {...methods}>
       <form
         onSubmit={methods.handleSubmit(handleSubmit)}
-        className="col-span-4 col-start-5 gap-4 flex flex-col justify-center"
+        className="col-span-6 lg:col-span-4 col-start-4 lg:col-start-5 gap-4 flex flex-col justify-center"
       >
         <NameField />
         <DescriptionField />

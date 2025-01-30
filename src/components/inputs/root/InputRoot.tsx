@@ -56,7 +56,7 @@ export function InputRoot({
     >
       {CompInput}
       {(AddonMaxChar || AddonHelper) && (
-        <div className={'root_bottom_helpers'}>
+        <div className={'root_bottom_helpers gap-2'}>
           {AddonHelper}
           {AddonMaxChar}
         </div>

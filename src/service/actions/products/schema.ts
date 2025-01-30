@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
 export const productCreateSchema = z.object({
-  name: z.string().min(1, { message: 'Required field' }).trim(),
+  name: z.string().min(1, { message: 'Required field' }).trim().max(255),
   category: z.object({
-    id: z.number().min(1).nullable(),
+    id: z.number().min(0).nullable(),
     label: z.string().min(1).max(32),
     labelOption: z.string().min(1).optional(),
   }),
@@ -11,7 +11,7 @@ export const productCreateSchema = z.object({
     .number()
     .min(1, { message: 'Required field' })
     .max(99999999999, { message: 'Very large value' }),
-  description: z.string().min(1, { message: 'Required field' }),
+  description: z.string().min(1, { message: 'Required field' }).max(3000),
   image: z.string().min(1, { message: 'Required field' }).url(),
 });
 

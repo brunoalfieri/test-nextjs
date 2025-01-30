@@ -6,7 +6,10 @@ import {
 import { useFormContext } from 'react-hook-form';
 
 interface InputAddonsMaxCharsProps
-  extends TypographyProps<'small', TYPOGRAPHY_VARIANTS.BODY> {
+  extends Omit<
+    TypographyProps<'small', TYPOGRAPHY_VARIANTS.BODY>,
+    'as' | 'variant'
+  > {
   maxChars: number;
   currentValue?: string;
   name?: string;
@@ -23,8 +26,8 @@ export function InputAddonsMaxChars({
     : undefined;
   const chars = currentValue?.length ?? value?.length ?? 0;
   return (
-    <Typography.Body data-layout="max-chars" {...props} as="small">
+    <Typography.Label data-layout="max-chars" {...props} as="small" size="sm">
       {`${chars}/${maxChars}`}
-    </Typography.Body>
+    </Typography.Label>
   );
 }
