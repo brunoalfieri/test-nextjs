@@ -5,7 +5,7 @@ import { ArrowBackIosNew, DeleteOutline } from '@mui/icons-material';
 
 export function Header(props: { productId: string }) {
   return (
-    <header className="col-span-12 text-center grid-cols-12 grid">
+    <header className="col-span-12 text-center grid-cols-12 grid place-items-center">
       <ButtonLink
         href="/products"
         variant="text"

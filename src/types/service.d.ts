@@ -1,14 +1,4 @@
-import { MutationConfig, QueryConfig } from '@/service/ReactQueryProvider';
 import { QueryFunctionContext } from '@tanstack/react-query';
-
-export type ActionMutationConfigArgs<T> = {
-  mutationConfig?: MutationConfig<T>;
-};
-
-export type ActionQueryConfigArgs<T, Q = object> = {
-  queryConfig?: QueryConfig<T>;
-} & Omit<Parameters<T>[0], 'context'> &
-  Q;
 
 export type IServiceFunctionParams<T = object> = {
   context?: QueryFunctionContext;
