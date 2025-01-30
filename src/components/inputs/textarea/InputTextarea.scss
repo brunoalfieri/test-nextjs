@@ -1,0 +1,74 @@
+.input_root:has(.input_textarea_container) {
+  @apply w-full h-max max-w-full px-0;
+  
+
+  &:has([data-resize='axisY']) {
+    @apply h-max w-full;
+  }
+
+  &:has([data-resize='axisX']) {
+    @apply w-max h-full;
+  }
+
+  &:has([data-resize='both']) {
+    @apply w-max h-max;
+  }
+
+  &:has([data-size='sm']) {
+    @apply min-h-8;
+
+    textarea {
+      @apply px-2;
+    }
+
+    .input_textarea_container {
+      @apply gap-1;
+    }
+  }
+  &:has([data-size='md']) {
+    @apply min-h-10;
+
+    textarea {
+      @apply px-4;
+    }
+
+    .input_textarea_container {
+      @apply gap-1;
+    }
+  }
+
+  &:has([data-size='lg']) {
+    @apply min-h-11;
+
+    textarea {
+      @apply px-4;
+    }
+
+    .input_textarea_container {
+      @apply gap-2;
+    }
+  }
+
+  .input_textarea_container {
+    @apply h-full w-full flex items-center rounded-lg;
+    grid-area: input;
+
+    &[data-resize="axisX"] textarea {
+      @apply resize-x;
+    }
+
+    &[data-resize="axisY"] textarea {
+      @apply resize-y w-full;
+
+    }
+
+    &[data-resize="both"] textarea {
+      @apply resize;
+
+    }
+
+    textarea {
+      @apply h-full min-h-full resize-none w-full bg-transparent border-none outline-none max-w-full py-2;
+    }
+  }
+}
