@@ -4,7 +4,7 @@ export const productCreateSchema = z.object({
   name: z.string().min(1, { message: 'Required field' }).trim(),
   category: z.object({
     id: z.number().min(1).nullable(),
-    label: z.string().min(1),
+    label: z.string().min(1).max(32),
     labelOption: z.string().min(1).optional(),
   }),
   price: z
@@ -19,15 +19,15 @@ export type ProductCreateSchema = z.infer<typeof productCreateSchema>;
 
 export const productReadSchema = z.object({
   id: z.number().min(0),
-  createdAt: z.date(),
-  updatedAt: z.date(),
+  createdAt: z.coerce.date(),
+  updatedAt: z.coerce.date(),
   ...productCreateSchema.shape,
 });
 
 export type ProductReadSchema = z.infer<typeof productReadSchema>;
 
 export const productUpdateSchema = productCreateSchema;
-export type UpdateProductSchema = ProductCreateSchema;
+export type ProductUpdateSchema = z.infer<typeof productUpdateSchema>;
 
 export const deleteProductSchema = z.object({
   id: productReadSchema.shape.id,

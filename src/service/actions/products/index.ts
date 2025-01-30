@@ -1,4 +1,7 @@
+import { _serviceProductCreate } from './create';
+import { _serviceProductsRead } from './read';
 import { _serviceProductsTable } from './table';
+import { _serviceProductUpdate } from './update';
 
 export enum EProductAction {
   'PRODUCTS_TABLE' = 'PRODUCTS_TABLE',
@@ -10,5 +13,8 @@ export enum EProductAction {
 }
 
 export const productsService = {
+  get: _serviceProductsRead,
   table: _serviceProductsTable,
+  create: _serviceProductCreate,
+  update: _serviceProductUpdate,
 };

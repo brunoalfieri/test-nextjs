@@ -29,12 +29,16 @@ export function CategoryField() {
         render={({ field }) => {
           return (
             <Autocomplete
+              loadingText="Loading.."
+              loading={categories.isFetching}
               options={categories.data}
               slotProps={{
                 listbox: {},
               }}
+              {...field}
               freeSolo
               clearOnBlur
+              defaultValue={formContext.getValues('category')}
               onChange={(event, newValue) => {
                 if (typeof newValue === 'object' && newValue !== null) {
                   field.onChange({
@@ -42,7 +46,9 @@ export function CategoryField() {
                     label: newValue?.label,
                   });
                 } else {
-                  formContext.resetField('category');
+                  formContext.resetField('category', {
+                    defaultValue: { id: null, label: '' },
+                  });
                 }
               }}
               getOptionLabel={(option) => {
@@ -74,7 +80,6 @@ export function CategoryField() {
               }}
               renderInput={(params) => (
                 <TextField
-                  {...field}
                   error={hasError}
                   helperText={hasError && 'Required field'}
                   variant="outlined"

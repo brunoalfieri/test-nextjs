@@ -16,6 +16,7 @@ export function ImageField() {
           size="sm"
           placeholder="Ex: https://picsum.photos/200"
           {...formContext.register('image', { required: true })}
+          defaultValue={formContext.getValues('image')}
         >
           <Input.Text.IconLeft icon={ImageOutlined} />
         </Input.Text.Root>

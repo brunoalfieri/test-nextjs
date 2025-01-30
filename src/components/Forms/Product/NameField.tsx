@@ -16,6 +16,7 @@ export function NameField() {
           rows={4}
           placeholder={`Ex: Notebook Acer Nitro V15 Core I5-13420h 8gb 512gb Rtx 3050 Cor Preto`}
           {...formContext.register('name', { required: true })}
+          defaultValue={formContext.getValues('name')}
         />
         <Input.Addons.Helper as="small" />
       </Input.Root>

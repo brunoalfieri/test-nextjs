@@ -1,5 +1,5 @@
+import { ButtonLink } from '@/components/button/link/ButtonLink';
 import { AddRounded } from '@mui/icons-material';
-import { ButtonLink } from '../button/link/ButtonLink';
 export function HeaderProductsTable() {
   return (
     <header className="py-4 grid grid-cols-12">

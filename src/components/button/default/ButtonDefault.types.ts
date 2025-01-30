@@ -10,6 +10,7 @@ export interface ButtonDefaultProps
     'className'
   > {
   href?: string;
+  loading?: string | boolean;
   size?: `${SIZE}` | 'icon';
   variant?: `${VARIANT}`;
   className?: string | string[];

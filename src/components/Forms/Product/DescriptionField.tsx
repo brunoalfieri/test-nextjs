@@ -32,6 +32,7 @@ Possui entrada extra para M2.
           rows={15}
           placeholder={placeholder}
           {...formContext.register('description', { required: true })}
+          defaultValue={formContext.getValues('description')}
         ></Input.Textarea>
         <Input.Addons.Helper as="small" />
       </Input.Root>

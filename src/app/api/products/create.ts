@@ -8,7 +8,7 @@ export async function productCreate(request: NextRequest) {
     const body = await request.json();
     const parsedBody = productCreateSchema.parse(body);
 
-    await prisma.products.create({
+    const product = await prisma.products.create({
       data: {
         ...parsedBody,
         category: {
@@ -21,7 +21,7 @@ export async function productCreate(request: NextRequest) {
         },
       },
     });
-    return NextResponse.json({ status: 200, message: 'Criou com sucesso ?' });
+    return NextResponse.json(product, { status: 200 });
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json(
