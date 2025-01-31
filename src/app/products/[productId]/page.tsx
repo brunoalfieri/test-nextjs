@@ -7,7 +7,7 @@ export default async function ProductUpdate(request: {
 }) {
   const { productId } = await request.params;
   const product = await productsService.get({ productId });
-  console.log(product);
+
   return (
     <main className="grid grid-cols-12 p-10 h-full">
       <Header product={product} />

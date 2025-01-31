@@ -5,7 +5,7 @@ export type IServiceFunctionParams<T = object> = {
 } & T;
 
 export interface IServiceResponseAPI<T> {
-  result: T[];
+  result: T;
 }
 
 export interface IServiceTableSort {
@@ -15,11 +15,10 @@ export interface IServiceTableSort {
   };
 }
 export interface IServiceTableParams extends IServiceTableSort {
-  search?: string;
-  page: number;
-  pageSize: number;
+  search?: string | null;
+  page: number | string;
+  pageSize: number | string;
 }
 export interface IServiceTableResponse<T> extends IServiceTableParams {
   result: T[];
-  pagination: IServiceTableParams;
 }

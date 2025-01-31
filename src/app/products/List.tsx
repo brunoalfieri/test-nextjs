@@ -1,0 +1,57 @@
+'use client';
+import { Card } from '@/components/card';
+import { EProductAction, productsService } from '@/service/actions/products';
+import { useQuery } from '@tanstack/react-query';
+import { useSearchParams } from 'next/navigation';
+
+export function List() {
+  const searchParams = useSearchParams();
+  const { isLoading, data } = useQuery({
+    queryKey: [
+      EProductAction.PRODUCTS_TABLE,
+      searchParams.get('search'),
+      searchParams.get('page'),
+      searchParams.get('pageSize'),
+      searchParams.get('minPrice'),
+      searchParams.get('maxPrice'),
+      searchParams.get('orderBy'),
+      searchParams.get('sortBy'),
+    ],
+    queryFn: (context) =>
+      productsService.table({
+        context,
+        params: {
+          page: searchParams.get('page') ?? 1,
+          pageSize: searchParams.get('pageSize') ?? 10,
+          search: searchParams.get('search'),
+          minPrice: searchParams.get('minPrice'),
+          maxPrice: searchParams.get('maxPrice'),
+          orderBy: searchParams.get('orderBy'),
+          sortBy: searchParams.get('sortBy'),
+        },
+      }),
+  });
+
+  if (isLoading) return 'loading...';
+
+  return (
+    <ul className="grid grid-cols-2 lg:grid-cols-3 gap-10">
+      {data?.result.map((product) => {
+        return (
+          <Card.Root
+            key={product.id}
+            as="li"
+            className="max-h-[500px]"
+            href={`/products/${product.id}`}
+          >
+            <Card.Image src={product.image} alt="Imagem ilustrativa" />
+            <Card.Title>{product.name}</Card.Title>
+            <Card.Description>{product.description}</Card.Description>
+            <Card.Price value={product.price} oldValue={200000} />
+            <Card.Category>{product.category.label}</Card.Category>
+          </Card.Root>
+        );
+      })}
+    </ul>
+  );
+}

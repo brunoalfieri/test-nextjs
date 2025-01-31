@@ -4,7 +4,7 @@ import { ProductsCategory } from '@prisma/client';
 import { ProductCreateSchema } from '../products/schema';
 
 export function _serviceCategoriesList({ context }: IServiceFunctionParams) {
-  return new API<IServiceResponseAPI<ProductsCategory>>()
+  return new API<IServiceResponseAPI<ProductsCategory[]>>()
     .method('GET')
     .signal(context?.signal)
     .append('/categories')

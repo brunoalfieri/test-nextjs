@@ -11,6 +11,6 @@ export type InputTextProps =
   | (DefaultProps & {
       mask?: undefined;
     })
-  | (DefaultProps & {
+  | ((DefaultProps & {
       mask: MaskProps;
-    });
+    }) 
