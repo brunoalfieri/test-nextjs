@@ -1,36 +1,121 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Teste Frontend - Gerenciamento de Produtos 🛒
 
-## Getting Started
+Este projeto é uma **aplicação web para gerenciamento de produtos**, desenvolvida com foco em **Next.js**, gerenciamento de estado, consumo de APIs, estilização com **Tailwind CSS** e implementação de testes.
+---
 
-First, run the development server:
+### ✨ Requisitos 💻
+- Node.js v22
+  - (Baixe aqui)[https://nodejs.org/pt/download]
+- Docker Desktop (Opcional)
+  - (Baixe aqui)[https://www.docker.com/products/docker-desktop/]
 
+## 🚀 Tecnologias Utilizadas
+
+- **Next.js 15**
+- **TypeScript**
+- **Tailwind CSS**
+- **Gerenciamento de estado** (Context API)
+- **API** Na própria aplicação
+
+## 🛠️ Funcionalidades
+
+1. **Listagem de Produtos**
+   - Exibição de produtos com:
+     - Nome do produto
+     - Categoria
+     - Preço
+     - Descrição
+     - Imagem
+
+2. **Cadastro de Produtos**
+   - Formulário com os seguintes campos:
+     - Nome
+     - Preço
+     - Descrição
+     - URL da Imagem
+   - O produto cadastrado deve ser exibido na lista automaticamente.
+
+3. **Filtragem e Ordenação**
+   - Filtrar produtos pelo nome, categoria, descrição e faixa de preço.
+   - Ordenar produtos de acordo com critérios definidos pelo usuário.
+
+## 🔥 Diferenciais (Extras)
+
+- Implementação de **paginação** para melhor experiência do usuário.
+- **Responsividade** para diferentes tamanhos de tela.
+- **Documentação** sobre as decisões técnicas adotadas.
+---
+
+## 🏗️ Como Rodar o Projeto Localmente
+
+1. Clone este repositório:
+   ```bash
+   git clone https://github.com/brunoalfieri/test-nextjs.git
+   ```
+2. Navegue até o diretório do projeto:
+   ```bash
+   cd test-nextjs
+   ```
+3. Instale as dependências:
+   ```bash
+   npm install
+   ```
+4. Renomei o arquivo .env.example para .env:
+5. Crie a tipagem do banco de dados:
+  ```bash
+   npx prisma generate
+   ```
+6. Crie o banco de dados:
+  ```bash
+   npx prisma migrate deploy
+   ```
+7. Inicie a aplicação:
+   ```bash
+   npm run dev
+   ```
+8. Acesse no navegador:
+   - **http://localhost:3000**
+
+---
+
+## 🧪 Testes
+
+Para executar os testes:
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm run test
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📌 Melhorias Futuras
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+1. **Aprimorar a UI/UX** para uma melhor experiência.
+2. **Adicionar integração com uma API real** no futuro.
+3. **Refinar testes** para maior cobertura.
+4. **Melhoria na performance**, otimizando renderização e carregamento de dados.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+### ✨ Docker 💻
+É possível executar a aplicação com Docker seguindo os passos abaixo, dando preferência ao Docker Compose para menor complexidade.
+1. Na raiz da aplicação execute:
+  ```bash
+    docker compose up
+  ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+---
 
-## Deploy on Vercel
+### ✨ Componentes 💻
+A aplicação foi usado principalmente componentes próprios para a possibilidade de analisar a capacidade técnica, em algumas situações foi usado o MUI por conveniencia e tempo.
+- Componente Input Text
+- Componente Input Textarea
+- Componente Modal com foco no Context API
+- Formulários
+- Componente Button
+- Componente ButtonLink
+- Componente Typography
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+
+

@@ -1,3 +1,4 @@
+import { revalidatePath } from 'next/cache';
 import { prisma } from '../../prisma';
 
 export async function categoryDelete({ categoryId }: { categoryId: number }) {
@@ -6,6 +7,7 @@ export async function categoryDelete({ categoryId }: { categoryId: number }) {
       where: { id: categoryId },
     });
 
+    revalidatePath('/products');
     return updatedCategory;
   } catch (error) {
     throw new Error('Error delete category', { cause: error });

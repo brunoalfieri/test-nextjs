@@ -1,4 +1,5 @@
 import { productUpdateSchema } from '@/service/actions/products/schema';
+import { revalidatePath } from 'next/cache';
 import { z } from 'zod';
 import { prisma } from '../../prisma';
 import { productRead } from './read';
@@ -33,6 +34,7 @@ export async function productUpdate({
       },
     });
 
+    revalidatePath('/products');
     return updatedProduct;
   } catch (error) {
     if (error instanceof z.ZodError) {

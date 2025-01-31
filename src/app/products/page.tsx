@@ -5,7 +5,11 @@ import { List } from './List';
 import { Sidebar } from './Sidebar';
 
 export default async function Products() {
-  const { result } = await productsPriceRange();
+  async function getPriceRange() {
+    'use server';
+    return productsPriceRange();
+  }
+  const { result } = await getPriceRange();
   return (
     <div className="flex flex-col md:grid grid-cols-[max-content,1fr] grid-rows-[max-content,1fr] h-full">
       <Sidebar {...result} />

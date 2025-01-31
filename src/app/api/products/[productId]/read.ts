@@ -20,7 +20,6 @@ export async function productRead({ productId }: { productId: string }) {
 
     return product;
   } catch (error) {
-    console.error(error);
-    throw new Error('Error read product');
+    throw new Error('Error read product', { cause: error });
   }
 }
