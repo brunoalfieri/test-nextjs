@@ -2,22 +2,26 @@ import { ORDER_BY } from '@/types/global';
 import { IServiceTableResponse } from '@/types/service';
 import { Prisma, Products } from '@prisma/client';
 import _ from 'lodash';
-import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '../prisma';
 
-export async function productsTable(request: NextRequest) {
+export async function productsTable({
+  search,
+  page,
+  minPrice,
+  maxPrice,
+  orderBy,
+  sortBy,
+  pageSize,
+}: {
+  search?: string;
+  page: number;
+  minPrice?: string | null;
+  maxPrice?: string | null;
+  orderBy?: string | null;
+  sortBy?: string | null;
+  pageSize: number;
+}) {
   try {
-    const search = request.nextUrl.searchParams.get('search') || '';
-    const page = parseInt(request.nextUrl.searchParams.get('page') || '0', 10);
-    const minPrice = request.nextUrl.searchParams.get('minPrice');
-    const maxPrice = request.nextUrl.searchParams.get('maxPrice');
-    const orderBy = request.nextUrl.searchParams.get('orderBy');
-    const sortBy = request.nextUrl.searchParams.get('sortBy');
-    const pageSize = parseInt(
-      request.nextUrl.searchParams.get('pageSize') || '10',
-      10
-    );
-
     function findWithWhere() {
       if (search || (minPrice && maxPrice)) {
         return {
@@ -88,24 +92,17 @@ export async function productsTable(request: NextRequest) {
     });
 
     const totalPages = Math.ceil(totalCount / pageSize);
-    return NextResponse.json(
-      {
-        result: products,
-        page,
-        pageSize,
-        totalCount,
-        totalPages,
-        search,
-        sortBy,
-        orderBy,
-      } as IServiceTableResponse<Products>,
-      { status: 200 }
-    );
+    return {
+      result: products,
+      page,
+      pageSize,
+      totalCount,
+      totalPages,
+      search,
+      sortBy,
+      orderBy,
+    } as IServiceTableResponse<Products>;
   } catch (error) {
-    console.error('Error fetching products:', error);
-    return NextResponse.json(
-      { message: 'Error fetching products' },
-      { status: 500 }
-    );
+    throw new Error('Error fetching products', { cause: error });
   }
 }

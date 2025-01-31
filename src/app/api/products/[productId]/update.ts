@@ -1,30 +1,29 @@
 import { productUpdateSchema } from '@/service/actions/products/schema';
-import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '../../prisma';
 import { productRead } from './read';
 
-export async function productUpdate(
-  request: NextRequest,
-  { params }: { params: { productId: string } }
-) {
+export async function productUpdate({
+  productId,
+  body,
+}: {
+  productId: string;
+  body: object;
+}) {
   try {
-    const productId = parseInt(params.productId, 10);
-
-    const body = await request.json();
     const parsedBody = productUpdateSchema.parse(body);
 
-    await productRead(request, { params });
+    await productRead({ productId });
 
     const updatedProduct = await prisma.products.update({
-      where: { id: productId },
+      where: { id: Number(productId) },
       data: {
         ...parsedBody,
         category: {
           connectOrCreate: {
             create: { name: parsedBody.category.label },
             where: {
-              id: parsedBody.category.id ?? undefined,
+              id: parsedBody.category.id ?? 0,
             },
           },
         },
@@ -34,23 +33,15 @@ export async function productUpdate(
       },
     });
 
-    return NextResponse.json(updatedProduct, { status: 200 });
+    return updatedProduct;
   } catch (error) {
     if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        {
-          message: 'Data validation error',
-          error: error.errors,
-        },
-        { status: 400 }
-      );
+      throw new Error('Data validation error', {
+        cause: error.errors,
+      });
     }
-    if (error instanceof NextResponse) {
-      return error;
-    }
-    return NextResponse.json(
-      { message: 'Error update product' },
-      { status: 500 }
-    );
+    throw new Error('Error update product', {
+      cause: error,
+    });
   }
 }

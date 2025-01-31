@@ -1,8 +1,5 @@
 import axios, { AxiosRequestConfig, Method } from 'axios';
-import setInterceptors from './interceptors';
 const client = axios.create();
-
-setInterceptors(client);
 
 export default class API<T> {
   config = {

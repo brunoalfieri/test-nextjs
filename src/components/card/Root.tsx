@@ -54,7 +54,7 @@ export function CardRoot<T extends keyof React.JSX.IntrinsicElements>({
       )}
     >
       {CImage}
-      <div className="p-4 flex flex-col relative pb-10 h-60">
+      <div className="p-4 flex flex-col relative pb-10 h-full">
         {CTitle}
         {CDescription}
         {CPrice}

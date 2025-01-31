@@ -37,7 +37,7 @@ export function MaxPriceField() {
         >
           <Input.Text.IconLeft icon={AttachMoney} />
         </Input.Text.Root>
-        <Input.Addons.Helper as="small" />
+        <Input.Addons.Helper />
       </Input.Root>
     </div>
   );

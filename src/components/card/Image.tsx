@@ -1,15 +1,17 @@
-import { ImgHTMLAttributes } from 'react';
+import Image, { ImageProps } from 'next/image';
 import { twMerge } from 'tailwind-merge';
 
-interface CardImageProps extends ImgHTMLAttributes<HTMLImageElement> {}
-export function CardImage(props: CardImageProps) {
+export function CardImage(props: ImageProps) {
   return (
-    <img
+    <Image
       {...props}
+      alt="Image ilustration"
+      width={300}
+      height={200}
       className={twMerge(
         'w-full h-[200px] object-cover object-center',
         props.className
       )}
-    ></img>
+    />
   );
 }

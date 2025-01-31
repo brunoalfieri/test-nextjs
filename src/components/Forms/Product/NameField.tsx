@@ -18,8 +18,8 @@ export function NameField() {
           {...formContext.register('name', { required: true })}
           defaultValue={formContext.getValues('name')}
         />
-        <Input.Addons.Helper as="small" />
-        <Input.Addons.MaxChars maxChars={255}/>
+        <Input.Addons.Helper />
+        <Input.Addons.MaxChars maxChars={255} />
       </Input.Root>
     </div>
   );

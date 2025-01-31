@@ -20,7 +20,7 @@ export function ImageField() {
         >
           <Input.Text.IconLeft icon={ImageOutlined} />
         </Input.Text.Root>
-        <Input.Addons.Helper as="small" />
+        <Input.Addons.Helper />
       </Input.Root>
     </div>
   );

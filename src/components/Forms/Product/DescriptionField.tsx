@@ -34,7 +34,7 @@ Possui entrada extra para M2.
           {...formContext.register('description', { required: true })}
           defaultValue={formContext.getValues('description')}
         ></Input.Textarea>
-        <Input.Addons.Helper as="small" />
+        <Input.Addons.Helper />
         <Input.Addons.MaxChars maxChars={3000} />
       </Input.Root>
     </div>

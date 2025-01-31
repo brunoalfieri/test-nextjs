@@ -1,43 +1,26 @@
 import _ from 'lodash';
-import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '../../prisma';
 
-export async function productRead(
-  request: NextRequest,
-  { params }: { params: { productId: string } }
-) {
+export async function productRead({ productId }: { productId: string }) {
   try {
-    const productId = parseInt(params.productId, 10);
-
     if (_.isNaN(productId)) {
-      throw NextResponse.json(
-        { message: 'Not found productId: ' + productId },
-        { status: 404 }
-      );
+      throw new Error('Not found parameter productId');
     }
 
     const product = await prisma.products.findUnique({
-      where: { id: productId },
+      where: { id: Number(productId) },
       include: {
         category: true,
       },
     });
 
     if (!product) {
-      throw NextResponse.json(
-        { message: 'Not found productId: ' + productId },
-        { status: 404 }
-      );
+      throw new Error('Not found productId: ' + productId);
     }
 
-    return NextResponse.json(product);
+    return product;
   } catch (error) {
-    if (error instanceof NextResponse) {
-      return error;
-    }
-    return NextResponse.json(
-      { message: 'Error read product' },
-      { status: 500 }
-    );
+    console.error(error);
+    throw new Error('Error read product');
   }
 }
