@@ -7,7 +7,7 @@ export async function productCreate(request: NextRequest) {
   try {
     const body = await request.json();
     const parsedBody = productCreateSchema.parse(body);
-
+    console.log('>>>', parsedBody.category.id);
     const product = await prisma.products.create({
       data: {
         ...parsedBody,
@@ -15,7 +15,7 @@ export async function productCreate(request: NextRequest) {
           connectOrCreate: {
             create: { name: parsedBody.category.label },
             where: {
-              id: parsedBody.category.id ?? undefined,
+              id: parsedBody.category.id ?? 0,
             },
           },
         },
@@ -32,6 +32,8 @@ export async function productCreate(request: NextRequest) {
         { status: 400 }
       );
     }
+
+    console.error(error);
 
     return NextResponse.json(
       {

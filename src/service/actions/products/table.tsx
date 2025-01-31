@@ -35,6 +35,7 @@ export function _serviceProductsTable({
     .then<IServiceTableResponse<ProductReadSchema>>(({ data }) => {
       return {
         ...data,
+
         result: data.result.map((product) => {
           return {
             ...product,

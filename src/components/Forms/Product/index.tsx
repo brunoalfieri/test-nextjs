@@ -11,6 +11,7 @@ import { zodResolver } from '@hookform/resolvers/zod';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
 import { FormProvider, useForm } from 'react-hook-form';
+import { toast } from 'react-toastify';
 import { CategoryField } from './CategoryField';
 import { DescriptionField } from './DescriptionField';
 import { ImageField } from './ImageField';
@@ -37,15 +38,18 @@ export function ProductForm(props: { initialProduct?: ProductReadSchema }) {
     mutationFn: productsService.create,
     onSuccess(data) {
       route.push(data.id.toString());
+      toast('Updated successfully!', { type: 'success' });
     },
   });
   const productUpdate = useMutation({
     mutationKey: [EProductAction.PRODUCT_CREATE],
     mutationFn: productsService.update,
+    onSuccess() {
+      toast('Updated successfully!', { type: 'info' });
+    },
   });
 
   function handleSubmit(product: ProductReadSchema | ProductCreateSchema) {
-    //* Curiosidade: Forma de validar com a técnica "Type Guard"
     if ('id' in product) {
       return productUpdate.mutateAsync({ product });
     } else return productCreate.mutateAsync({ product });
@@ -54,7 +58,7 @@ export function ProductForm(props: { initialProduct?: ProductReadSchema }) {
     <FormProvider {...methods}>
       <form
         onSubmit={methods.handleSubmit(handleSubmit)}
-        className="col-span-6 lg:col-span-4 col-start-4 lg:col-start-5 gap-4 flex flex-col justify-center"
+        className="col-span-10 md:col-span-6 lg:col-span-4 col-start-2 md:col-start-4 lg:col-start-5 gap-4 flex flex-col justify-center"
       >
         <NameField />
         <DescriptionField />

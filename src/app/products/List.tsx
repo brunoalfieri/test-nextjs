@@ -1,7 +1,10 @@
 'use client';
 import { Card } from '@/components/card';
 import { EProductAction, productsService } from '@/service/actions/products';
+import { ORDER_BY } from '@/types/global';
+import { Skeleton } from '@mui/material';
 import { useQuery } from '@tanstack/react-query';
+import _ from 'lodash';
 import { useSearchParams } from 'next/navigation';
 
 export function List() {
@@ -21,27 +24,46 @@ export function List() {
       productsService.table({
         context,
         params: {
-          page: searchParams.get('page') ?? 1,
+          page: searchParams.get('page') ?? 0,
           pageSize: searchParams.get('pageSize') ?? 10,
           search: searchParams.get('search'),
           minPrice: searchParams.get('minPrice'),
           maxPrice: searchParams.get('maxPrice'),
-          orderBy: searchParams.get('orderBy'),
+          orderBy: searchParams.get('orderBy') as ORDER_BY | null,
           sortBy: searchParams.get('sortBy'),
         },
       }),
   });
 
-  if (isLoading) return 'loading...';
+  if (isLoading) {
+    const total = Number(searchParams.get('pageSize')) || 10;
+    return (
+      <ul className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-10">
+        {_.times(total).map((index) => {
+          return (
+            <Skeleton
+              key={index}
+              width="100%"
+              height={500}
+              variant="rectangular"
+              className="rounded-md"
+            />
+          );
+        })}
+      </ul>
+    );
+  }
 
+  if (data?.result.length === 0)
+    return <div className="text-center">Empty</div>;
   return (
-    <ul className="grid grid-cols-2 lg:grid-cols-3 gap-10">
+    <ul className="grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-10">
       {data?.result.map((product) => {
         return (
           <Card.Root
             key={product.id}
             as="li"
-            className="max-h-[500px]"
+            className="h-[500px]"
             href={`/products/${product.id}`}
           >
             <Card.Image src={product.image} alt="Imagem ilustrativa" />

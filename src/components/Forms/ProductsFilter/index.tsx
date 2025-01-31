@@ -25,11 +25,11 @@ export function FormProductsFilter(props: {
   const maxPriceParam = searchParams.get('maxPrice');
   const minPriceParam = searchParams.get('minPrice');
   const minPrice =
-    minPriceParam && _.isNaN(parseInt(minPriceParam, 10))
+    !minPriceParam || _.isNaN(parseInt(minPriceParam, 10))
       ? null
       : parseInt(minPriceParam as string, 10);
   const maxPrice =
-    maxPriceParam && _.isNaN(parseInt(maxPriceParam, 10))
+    !maxPriceParam || _.isNaN(parseInt(maxPriceParam, 10))
       ? null
       : parseInt(maxPriceParam as string, 10);
   const methods = useForm<ProductsFilterSchema>({
@@ -46,7 +46,7 @@ export function FormProductsFilter(props: {
   const formRef = useRef<HTMLFormElement>(null);
 
   function handleFiltersSubmit(data: ProductsFilterSchema) {
-    const params = new URLSearchParams();
+    const params = new URLSearchParams(window.location.search);
     _.entries(data).map(([key, value]) => {
       if (value !== null) {
         params.set(key, value.toString());

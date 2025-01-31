@@ -3,6 +3,7 @@ import { ModalProvider } from '@/providers/ModalProvider';
 import ReactQueryProvider from '@/service/ReactQueryProvider';
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
+import { Slide, ToastContainer } from 'react-toastify';
 import { twMerge } from 'tailwind-merge';
 import './globals.css';
 
@@ -27,6 +28,20 @@ export default function RootLayout({
         <ReactQueryProvider>
           <ModalProvider>{children}</ModalProvider>
         </ReactQueryProvider>
+        <ToastContainer
+          position="bottom-right"
+          autoClose={5000}
+          hideProgressBar
+          newestOnTop={false}
+          closeOnClick
+          rtl={false}
+          
+          pauseOnFocusLoss={false}
+          draggable={false}
+          pauseOnHover={false}
+          theme="light"
+          transition={Slide}
+        />
       </body>
     </html>
   );

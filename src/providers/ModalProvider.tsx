@@ -1,22 +1,46 @@
 'use client';
-import React, { createContext, ReactNode, useContext, useState } from 'react';
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useContext,
+  useState,
+} from 'react';
 
-interface ModalContextProps {
+interface ModalContextProps<T extends object | null> {
   isOpen: boolean;
-  openModal: () => void;
+  openModal: (props?: { fnConfirm?: () => void; customProps?: T }) => void;
   closeModal: () => void;
+  fnConfirm: () => () => void;
+  setFnConfirm: Dispatch<SetStateAction<() => () => void>>;
+  customProps: T;
 }
 
-const ModalContext = createContext<ModalContextProps | undefined>(undefined);
+//@ts-expect-error: Usage unkown
+const ModalContext = createContext<ModalContextProps<unknown> | undefined>(
+  undefined
+);
 
 interface ModalProviderProps {
   children: ReactNode;
 }
 
-export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
+export const ModalProvider = <T extends object | null>({
+  children,
+}: ModalProviderProps & T) => {
+  const [fnConfirm, setFnConfirm] = useState<() => () => void>(() => () => {});
   const [isOpen, setIsOpen] = useState(false);
+  const [customProps, setCustomProps] = useState<T | null>(null);
 
-  const openModal = () => {
+  const openModal = (props?: { fnConfirm?: () => void; customProps?: T }) => {
+    if (props && props.fnConfirm) {
+      const fn = props.fnConfirm;
+      setFnConfirm(() => fn);
+    }
+    if (props?.customProps) {
+      setCustomProps(props?.customProps);
+    }
     setIsOpen(true);
   };
   const closeModal = () => {
@@ -24,16 +48,26 @@ export const ModalProvider: React.FC<ModalProviderProps> = ({ children }) => {
   };
 
   return (
-    <ModalContext.Provider value={{ isOpen, openModal, closeModal }}>
+    <ModalContext.Provider
+      value={{
+        isOpen,
+        //@ts-expect-error: Usage unknown
+        openModal,
+        closeModal,
+        setFnConfirm,
+        fnConfirm,
+        customProps,
+      }}
+    >
       {children}
     </ModalContext.Provider>
   );
 };
 
-export const useModal = () => {
+export const useModal = <T extends object | null>() => {
   const context = useContext(ModalContext);
   if (!context) {
     throw new Error('useModal must be used within a ModalProvider');
   }
-  return context;
+  return context as ModalContextProps<null | T>;
 };

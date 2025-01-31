@@ -1,7 +1,7 @@
 model Products {
   id   Int    @id @default(autoincrement())
   name String
-  category ProductsCategory @relation(fields: [categoryId], references: [id])
+  category ProductsCategory @relation(fields: [categoryId], references: [id], onDelete: Cascade)
   categoryId Int
   price Int
   description String

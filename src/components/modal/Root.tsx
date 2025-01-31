@@ -26,13 +26,13 @@ export function ModalRoot(props: ModalRootProps) {
     children: props.children,
     isRequired: true,
   });
+  if (!isOpen) return null;
 
   return (
     <div
       {...props}
       className={twMerge(
         'fixed top-0 left-0 bg-zinc-800 bg-opacity-50 w-full h-full z-10 grid place-items-center grid-cols-12',
-        !isOpen && 'hidden',
         props.className
       )}
     >

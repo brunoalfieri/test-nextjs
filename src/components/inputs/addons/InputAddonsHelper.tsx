@@ -1,11 +1,16 @@
 'use client';
 import { Typography } from '@/components/typography/Typography';
+import {
+  TYPOGRAPHY_VARIANTS,
+  TypographyProps,
+} from '@/components/typography/Typography.types';
 import { useFormContext } from 'react-hook-form';
 import { twMerge } from 'tailwind-merge';
 
 interface InputAddonsHelperProps
-  extends React.ComponentProps<
-    typeof Typography.Body<keyof React.JSX.IntrinsicElements>
+  extends Omit<
+    TypographyProps<'small', TYPOGRAPHY_VARIANTS.LABEL>,
+    'as' | 'variant'
   > {
   hasError?: boolean;
   inputName?: string;

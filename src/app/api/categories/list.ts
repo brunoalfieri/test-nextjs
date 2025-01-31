@@ -8,6 +8,9 @@ export async function categoriesList() {
         createdAt: true,
         updatedAt: true,
       },
+      include: {
+        _count: true,
+      },
     });
 
     return NextResponse.json(
