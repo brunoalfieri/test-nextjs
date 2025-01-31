@@ -1,8 +1,12 @@
 import API from '@/service/api';
+import { IServiceFunctionParams } from '@/types/service';
 import { Prisma } from '@prisma/client';
 import { ProductReadSchema } from './schema';
 
-export function _serviceProductsRead({ productId }: { productId: string }) {
+export function _serviceProductsRead({
+  context,
+  productId,
+}: IServiceFunctionParams<{ productId: string }>) {
   return new API<
     Prisma.ProductsGetPayload<{
       include: {
@@ -12,6 +16,7 @@ export function _serviceProductsRead({ productId }: { productId: string }) {
   >()
     .method('GET')
     .append('/products/' + productId)
+    .signal(context?.signal)
     .build()
     .then<ProductReadSchema>(async ({ data }) => {
       return {

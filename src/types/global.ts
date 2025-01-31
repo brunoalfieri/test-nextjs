@@ -15,3 +15,8 @@ export enum WEIGHTS {
   'SEMIBOLD' = 'semibold',
   'BOLD' = 'bold',
 }
+
+export enum ORDER_BY {
+  'ASC' = 'asc',
+  'DESC' = 'desc',
+}
