@@ -1,12 +1,12 @@
 import { ORDER_BY } from '@/types/global';
 import { z } from 'zod';
+import { categoryReadSchema } from '../categories/schema';
 
 export const productCreateSchema = z.object({
   name: z.string().min(1, { message: 'Required field' }).trim().max(255),
   category: z.object({
+    ...categoryReadSchema.shape,
     id: z.number().min(0).nullable(),
-    label: z.string().min(1).max(32),
-    labelOption: z.string().min(1).optional(),
   }),
   price: z
     .number()

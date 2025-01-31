@@ -9,6 +9,7 @@ import { ProductReadSchema } from '@/service/actions/products/schema';
 import { ArrowBackIosNew, DeleteOutline } from '@mui/icons-material';
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from 'next/navigation';
+import { toast } from 'react-toastify';
 
 export function Header(props: { product: ProductReadSchema }) {
   const route = useRouter();
@@ -18,6 +19,8 @@ export function Header(props: { product: ProductReadSchema }) {
     mutationKey: [EProductAction.PRODUCT_DELETE],
     mutationFn: productsService.delete,
     onSuccess() {
+      toast('Delete successfully!', { type: 'error' });
+
       route.replace('/products');
     },
   });
@@ -39,7 +42,7 @@ export function Header(props: { product: ProductReadSchema }) {
         variant="solid"
         size={productDelete.isPending ? 'md' : 'icon'}
         loading={productDelete.isPending && 'Processing'}
-        onClick={openModal}
+        onClick={() => openModal()}
         className="col-span-1 enabled:hover:scale-110 col-end-13 enabled:!bg-red-500 enabled:!rounded-full transition-all group"
       >
         <DeleteOutline className="group-hover:scale-125 transition-all" />

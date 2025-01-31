@@ -23,7 +23,6 @@ export function SearchField() {
             type="button"
             buttonProps={{
               type: 'submit',
-              className: 'hover:scale-125 transition-all',
             }}
             icon={SearchRounded}
           />

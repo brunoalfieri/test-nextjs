@@ -1,5 +1,6 @@
 import { ORDER_BY } from '@/types/global';
-import { Prisma } from '@prisma/client';
+import { IServiceTableResponse } from '@/types/service';
+import { Prisma, Products } from '@prisma/client';
 import _ from 'lodash';
 import { NextRequest, NextResponse } from 'next/server';
 import { prisma } from '../prisma';
@@ -7,7 +8,7 @@ import { prisma } from '../prisma';
 export async function productsTable(request: NextRequest) {
   try {
     const search = request.nextUrl.searchParams.get('search') || '';
-    const page = parseInt(request.nextUrl.searchParams.get('page') || '1', 10);
+    const page = parseInt(request.nextUrl.searchParams.get('page') || '0', 10);
     const minPrice = request.nextUrl.searchParams.get('minPrice');
     const maxPrice = request.nextUrl.searchParams.get('maxPrice');
     const orderBy = request.nextUrl.searchParams.get('orderBy');
@@ -58,13 +59,6 @@ export async function productsTable(request: NextRequest) {
         } as Prisma.ProductsWhereInput;
       }
     }
-    console.log(
-      'REQUEST',
-      (sortBy && {
-        [sortBy]: orderBy ?? ORDER_BY.ASC,
-      }) ||
-        undefined
-    );
 
     function ruleOrderBy(field: string) {
       if (field === sortBy) {
@@ -82,26 +76,29 @@ export async function productsTable(request: NextRequest) {
         price: ruleOrderBy('price'),
         description: ruleOrderBy('description'),
       },
-      skip: (page - 1) * pageSize,
+      skip: page === 0 ? 0 : page * pageSize,
       take: pageSize,
       include: {
         category: true,
       },
     });
 
-    const totalCount = products.length;
+    const totalCount = await prisma.products.count({
+      where: findWithWhere(),
+    });
 
     const totalPages = Math.ceil(totalCount / pageSize);
     return NextResponse.json(
       {
         result: products,
-        pagination: {
-          page,
-          pageSize,
-          totalCount,
-          totalPages,
-        },
-      },
+        page,
+        pageSize,
+        totalCount,
+        totalPages,
+        search,
+        sortBy,
+        orderBy,
+      } as IServiceTableResponse<Products>,
       { status: 200 }
     );
   } catch (error) {

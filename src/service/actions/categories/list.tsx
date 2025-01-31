@@ -1,21 +1,30 @@
 import API from '@/service/api';
 import { IServiceFunctionParams, IServiceResponseAPI } from '@/types/service';
-import { ProductsCategory } from '@prisma/client';
+import { Prisma } from '@prisma/client';
 import { ProductCreateSchema } from '../products/schema';
 
-export function _serviceCategoriesList({ context }: IServiceFunctionParams) {
-  return new API<IServiceResponseAPI<ProductsCategory[]>>()
+type CategoryResponse = Prisma.ProductsCategoryGetPayload<{
+  include: {
+    _count: true;
+  };
+}>;
+
+export function _serviceCategoriesList(props?: IServiceFunctionParams) {
+  return new API<IServiceResponseAPI<CategoryResponse[]>>()
     .method('GET')
-    .signal(context?.signal)
+    .signal(props?.context?.signal)
     .append('/categories')
     .build()
-    .then<ProductCreateSchema['category'][]>(({ data }) => {
-      return data.result.map((category) => {
-        return {
-          id: category.id,
-          label: category.name,
-          labelOption: undefined,
-        };
-      });
-    });
+    .then<(ProductCreateSchema['category'] & CategoryResponse)[]>(
+      ({ data }) => {
+        return data.result.map((category) => {
+          return {
+            ...category,
+            id: category.id,
+            label: category.name,
+            labelOption: undefined,
+          };
+        });
+      }
+    );
 }

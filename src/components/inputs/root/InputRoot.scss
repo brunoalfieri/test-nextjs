@@ -65,7 +65,7 @@
     }
 
     &[data-success="true"] {
-      @apply border-green-400  border-4 focus-within:shadow-green-50 focus-within:border-green-600 hover:focus-within:border-green-900 hover:border-green-500 hover:focus-within:shadow-green-100;
+      @apply border-green-400  border focus-within:shadow-green-50 focus-within:border-green-600 hover:focus-within:border-green-900 hover:border-green-500 hover:focus-within:shadow-green-100;
     }
   }
 

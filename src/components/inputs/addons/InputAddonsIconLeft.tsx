@@ -1,6 +1,7 @@
 import { SvgIconComponent } from '@mui/icons-material';
 import { SvgIcon, SvgIconProps } from '@mui/material';
 import { ButtonHTMLAttributes } from 'react';
+import { twMerge } from 'tailwind-merge';
 
 type InputAddonsIconLeftProps =
   | (SvgIconProps & {
@@ -21,7 +22,13 @@ export function InputAddonsIconLeft({
 }: InputAddonsIconLeftProps) {
   if (type === 'button') {
     return (
-      <button {...buttonProps}>
+      <button
+        {...buttonProps}
+        className={twMerge(
+          'hover:scale-125 transition-all',
+          buttonProps?.className
+        )}
+      >
         <InputAddonsIconLeft {...props} type="svg" />
       </button>
     );

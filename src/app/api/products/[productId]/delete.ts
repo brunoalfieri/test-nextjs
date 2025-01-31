@@ -7,7 +7,7 @@ export async function productDelete(
   { params }: { params: { productId: string } }
 ) {
   try {
-    const productId = parseInt(params.productId, 10);
+    const productId = parseInt(await params.productId, 10);
 
     await productRead(request, { params });
     const deletedProduct = await prisma.products.delete({

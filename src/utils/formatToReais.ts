@@ -1,6 +1,5 @@
 export function formatCentsToReais(cents: string | number): string {
   const centsString = cents.toString();
-  console.log('centsString', centsString);
   if (!/^\d+$/.test(centsString)) {
     throw new Error('The string should only contain numbers: ' + cents);
   }
