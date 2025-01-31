@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { revalidatePath } from 'next/cache';
 import { prisma } from '../../prisma';
 import { productRead } from './read';
 
@@ -9,14 +9,9 @@ export async function productDelete({ productId }: { productId: string }) {
       where: { id: Number(productId) },
     });
 
-    return NextResponse.json(deletedProduct, { status: 200 });
+    revalidatePath('/products');
+    return deletedProduct;
   } catch (error) {
-    if (error instanceof NextResponse) {
-      return error;
-    }
-    return NextResponse.json(
-      { message: 'Error deleting product' },
-      { status: 500 }
-    );
+    throw new Error('Error read product', { cause: error });
   }
 }
