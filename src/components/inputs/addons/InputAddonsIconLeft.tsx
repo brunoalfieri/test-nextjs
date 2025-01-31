@@ -33,5 +33,5 @@ export function InputAddonsIconLeft({
       </button>
     );
   }
-  return <SvgIcon data-direction="right" component={props.icon} {...props} />;
+  return <SvgIcon data-direction="left" component={props.icon} {...props} />;
 }
