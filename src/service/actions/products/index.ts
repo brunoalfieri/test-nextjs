@@ -1,4 +1,5 @@
 import { _serviceProductCreate } from './create';
+import { _serviceProductDelete } from './delete';
 import { _serviceProductsRead } from './read';
 import { _serviceProductsTable } from './table';
 import { _serviceProductUpdate } from './update';
@@ -17,4 +18,5 @@ export const productsService = {
   table: _serviceProductsTable,
   create: _serviceProductCreate,
   update: _serviceProductUpdate,
+  delete: _serviceProductDelete,
 };

@@ -1,4 +1,5 @@
 import '@/mock/index';
+import { ModalProvider } from '@/providers/ModalProvider';
 import ReactQueryProvider from '@/service/ReactQueryProvider';
 import type { Metadata } from 'next';
 import { Poppins } from 'next/font/google';
@@ -23,7 +24,9 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full w-full">
       <body className={twMerge('h-full w-full', ProximaNova.className)}>
-        <ReactQueryProvider>{children}</ReactQueryProvider>
+        <ReactQueryProvider>
+          <ModalProvider>{children}</ModalProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );

@@ -10,7 +10,7 @@ export default async function ProductUpdate(request: {
   console.log(product);
   return (
     <main className="grid grid-cols-12 p-10 h-full">
-      <Header productId={productId} />
+      <Header product={product} />
       <ProductForm initialProduct={product} />
     </main>
   );
