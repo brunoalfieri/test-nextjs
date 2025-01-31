@@ -1,11 +1,11 @@
 import { Input } from '@/components/inputs/Input';
 import { Typography } from '@/components/typography/Typography';
-import { FilterSchema } from '@/service/actions/products/schema';
+import { ProductsFilterSchema } from '@/service/actions/products/schema';
 import { SearchRounded } from '@mui/icons-material';
 import { useFormContext } from 'react-hook-form';
 
 export function SearchField() {
-  const formContext = useFormContext<FilterSchema>();
+  const formContext = useFormContext<ProductsFilterSchema>();
   const searchRegister = formContext.register('search');
   return (
     <div>

@@ -1,20 +1,19 @@
 import { categoryUpdateSchema } from '@/service/actions/categories/schema';
-import { NextRequest, NextResponse } from 'next/server';
 import { z } from 'zod';
 import { prisma } from '../../prisma';
 
-export async function categoryUpdate(
-  request: NextRequest,
-  { params }: { params: { categoryId: string } }
-) {
+export async function categoryUpdate({
+  body,
+  categoryId,
+}: {
+  body: object;
+  categoryId: number;
+}) {
   try {
-    const { categoryId } = await params;
-
-    const body = await request.json();
     const parsedBody = categoryUpdateSchema.parse(body);
 
     const updatedCategory = await prisma.productsCategory.update({
-      where: { id: Number(categoryId) },
+      where: { id: categoryId },
       data: {
         name: parsedBody.label,
       },
@@ -23,25 +22,13 @@ export async function categoryUpdate(
       },
     });
 
-    return NextResponse.json(updatedCategory, { status: 200 });
+    return updatedCategory;
   } catch (error) {
-    console.error(error);
-
     if (error instanceof z.ZodError) {
-      return NextResponse.json(
-        {
-          message: 'Data validation error',
-          error: error.errors,
-        },
-        { status: 400 }
-      );
+      throw new Error('Data validation error', {
+        cause: error.errors,
+      });
     }
-    if (error instanceof NextResponse) {
-      return error;
-    }
-    return NextResponse.json(
-      { message: 'Error update category' },
-      { status: 500 }
-    );
+    throw new Error('Error update category', { cause: error });
   }
 }

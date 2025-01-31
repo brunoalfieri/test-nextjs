@@ -19,7 +19,7 @@ export const productCreateSchema = z.object({
 export type ProductCreateSchema = z.infer<typeof productCreateSchema>;
 
 export const productReadSchema = z.object({
-  id: z.number().min(0),
+  id: z.number().min(0).nullable(),
   createdAt: z.coerce.date(),
   updatedAt: z.coerce.date(),
   ...productCreateSchema.shape,

@@ -28,7 +28,7 @@ export function InputAddonsHelper({
   return (
     <Typography.Label
       {...props}
-      as={props.as ?? 'small'}
+      as="small"
       size="sm"
       data-layout="helper"
       className={twMerge(hasError && 'text-[#d32f2f]', 'text-right', className)}

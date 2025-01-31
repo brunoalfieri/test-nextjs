@@ -66,7 +66,7 @@ export function CategoryField<
         <Typography.Label as="label">
           #{props.category.id.toString().padStart(3, '0')}
         </Typography.Label>
-        <Input.Root className="w-full">
+        <Input.Root className="w-full" formNoValidate>
           <Input.Text.Root
             {...methods.register('label')}
             size="sm"

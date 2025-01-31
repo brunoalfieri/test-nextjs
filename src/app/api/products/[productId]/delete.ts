@@ -1,17 +1,12 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import { prisma } from '../../prisma';
 import { productRead } from './read';
 
-export async function productDelete(
-  request: NextRequest,
-  { params }: { params: { productId: string } }
-) {
+export async function productDelete({ productId }: { productId: string }) {
   try {
-    const productId = parseInt(await params.productId, 10);
-
-    await productRead(request, { params });
+    await productRead({ productId });
     const deletedProduct = await prisma.products.delete({
-      where: { id: productId },
+      where: { id: Number(productId) },
     });
 
     return NextResponse.json(deletedProduct, { status: 200 });

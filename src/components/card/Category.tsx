@@ -5,11 +5,10 @@ import {
   TypographyProps,
 } from '../typography/Typography.types';
 
-interface CardCategoryProps
-  extends Omit<
-    TypographyProps<'h2', TYPOGRAPHY_VARIANTS.LABEL>,
-    'as' | 'variant'
-  > {}
+type CardCategoryProps = Omit<
+  TypographyProps<'h2', TYPOGRAPHY_VARIANTS.LABEL>,
+  'as' | 'variant'
+>;
 export function CardCategory(props: CardCategoryProps) {
   return (
     <Typography.Label

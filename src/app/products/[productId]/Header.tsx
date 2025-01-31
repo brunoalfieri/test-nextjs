@@ -36,7 +36,7 @@ export function Header(props: { product: ProductReadSchema }) {
         <ArrowBackIosNew className="group-hover:scale-125 transition-all" />
       </ButtonLink>
       <Typography.Title as="h1" className="col-span-4 col-start-5">
-        Update Product #{props.product.id.toString().padStart(3, '0')}
+        Update Product #{props.product.id?.toString().padStart(3, '0')}
       </Typography.Title>
       <Button
         variant="solid"

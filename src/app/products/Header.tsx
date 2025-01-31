@@ -42,7 +42,7 @@ export function HeaderProductsTable() {
         });
       }
     });
-  }, []);
+  }, [queryClient]);
 
   function handlePaginationFilter(
     field: 'pageSize' | 'page',
@@ -80,7 +80,6 @@ export function HeaderProductsTable() {
         onPageChange={(_, newValue) => handlePaginationFilter('page', newValue)}
         rowsPerPage={pagination.pageSize}
         onRowsPerPageChange={(e) => {
-          console.log(e);
           handlePaginationFilter('pageSize', e.target.value);
         }}
       />

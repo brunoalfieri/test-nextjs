@@ -1,3 +1,8 @@
+import { NextResponse } from 'next/server';
 import { categoriesList } from './list';
 
-export { categoriesList as GET };
+const GET = async () => {
+  return NextResponse.json(await categoriesList());
+};
+
+export { GET };

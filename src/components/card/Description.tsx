@@ -5,11 +5,10 @@ import {
   TypographyProps,
 } from '../typography/Typography.types';
 
-interface CardDescriptionProps
-  extends Omit<
-    TypographyProps<'p', TYPOGRAPHY_VARIANTS.LABEL>,
-    'as' | 'variant'
-  > {}
+type CardDescriptionProps = Omit<
+  TypographyProps<'p', TYPOGRAPHY_VARIANTS.LABEL>,
+  'as' | 'variant'
+>;
 
 export function CardDescription(props: CardDescriptionProps) {
   return (
