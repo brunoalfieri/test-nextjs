@@ -16,6 +16,7 @@ export function Header() {
       <Typography.Title as="h1" className="col-span-4 col-start-5">
         Create New Product
       </Typography.Title>
+      
     </header>
   );
 }

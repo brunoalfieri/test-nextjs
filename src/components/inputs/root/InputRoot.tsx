@@ -21,6 +21,9 @@ export function InputRoot({
   const CompInput = findChildrenByType({
     children,
     componentType: [InputTextRoot, Input.Textarea],
+    props: {
+      formNoValidate: props.formNoValidate,
+    },
   });
 
   if (_.isNil(CompInput)) {

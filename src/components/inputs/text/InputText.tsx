@@ -32,9 +32,13 @@ export const InputTextRoot = React.forwardRef<HTMLInputElement, InputTextProps>(
         ) : (
           <input ref={ref} id={name} name={name} {...props} />
         )}
-        {!isSubmitted && IconRight}
-        {isSubmitted && hasError && <Close className="fill-red-600" />}
-        {isSubmitted && !hasError && <CheckCircle className="fill-green-600" />}
+        {(props.formNoValidate || !isSubmitted) && IconRight}
+        {!props.formNoValidate && isSubmitted && hasError && (
+          <Close className="fill-red-600" />
+        )}
+        {!props.formNoValidate && isSubmitted && !hasError && (
+          <CheckCircle className="fill-green-600" />
+        )}
       </div>
     );
   }

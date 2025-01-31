@@ -5,11 +5,19 @@ import {
   IServiceTableResponse,
 } from '@/types/service';
 import { Prisma } from '@prisma/client';
+import { ProductReadSchema } from './schema';
 
 export function _serviceProductsTable({
   context,
   params,
-}: IServiceFunctionParams<{ params: IServiceTableParams }>) {
+}: IServiceFunctionParams<{
+  params: IServiceTableParams & {
+    minPrice?: string | null;
+    maxPrice?: string | null;
+    orderBy?: string | null;
+    sortBy?: string | null;
+  };
+}>) {
   return new API<
     IServiceTableResponse<
       Prisma.ProductsGetPayload<{
@@ -24,7 +32,18 @@ export function _serviceProductsTable({
     .append('/products')
     .params<IServiceTableParams>(params)
     .build()
-    .then(async ({ data }) => {
-      return data;
+    .then<IServiceTableResponse<ProductReadSchema>>(({ data }) => {
+      return {
+        ...data,
+        result: data.result.map((product) => {
+          return {
+            ...product,
+            category: {
+              id: product.category.id,
+              label: product.category.name,
+            },
+          } as ProductReadSchema;
+        }),
+      };
     });
 }
