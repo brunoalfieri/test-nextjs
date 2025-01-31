@@ -97,24 +97,53 @@ npm run test
 ---
 
 ### ✨ Docker 💻
-É possível executar a aplicação com Docker seguindo os passos abaixo, dando preferência ao Docker Compose para menor complexidade.
-1. Na raiz da aplicação execute:
+Para facilitar a execução do projeto, é possível rodá-lo utilizando Docker. Recomendamos o uso do Docker Compose para reduzir a complexidade da configuração.
+
+1. Certifique-se de ter Docker e Docker Compose instalados.
+2. Na raiz do projeto, execute o seguinte comando:
   ```bash
     docker compose up
   ```
-
+A aplicação será iniciada automaticamente e estará disponível em http://localhost:3000.
 
 ---
 
 ### ✨ Componentes 💻
-A aplicação foi usado principalmente componentes próprios para a possibilidade de analisar a capacidade técnica, em algumas situações foi usado o MUI por conveniencia e tempo.
-- Componente Input Text
-- Componente Input Textarea
-- Componente Modal com foco no Context API
-- Formulários
-- Componente Button
-- Componente ButtonLink
-- Componente Typography
+A aplicação foi desenvolvida utilizando principalmente componentes próprios, permitindo maior flexibilidade e demonstrando a capacidade técnica. Entretanto, em algumas situações específicas, MUI foi utilizado para otimizar o tempo de desenvolvimento e manter a consistência visual.
+
+Principais componentes utilizados:
+
+- Input Text: Campo de entrada de texto personalizado.
+
+- Input Textarea: Área de texto expandida para descrições.
+
+- Modal: Componente modal com gerenciamento via Context API.
+
+- Formulários: Conjunto de elementos estruturados para cadastro e edição de produtos.
+
+- Button: Botão reutilizável para interações na interface.
+
+- ButtonLink: Botão com funcionalidade de navegação.
+
+- Typography: Componentes para manipulação de estilos de texto.
+
+### Decisões Técnicas
+- **React Hook Form**:
+  O React Hook Form é uma biblioteca prática para validação de formulários, utilizada tanto no cliente quanto no servidor. Ela facilita a integração em aplicações fullstack, destacando-se pela compatibilidade com diversas bibliotecas, especialmente o MUI amplamente usado.
+
+- **Prisma**:
+  Optei por integrar o Prisma em vez de usar uma simples biblioteca para mockar dados, buscando uma abordagem mais realista com banco de dados. Apesar das limitações do SQLite como gerenciador, principalmente em questões de ordenação, essa escolha torna os testes mais próximos de uma integração completa com backend.
+
+- **Design Pattern dos Componentes**:
+  O uso do padrão de composição permite uma customização simples e prática, além de garantir escalabilidade. Um desafio desse padrão é a abstração quando precisamos restringir um escopo bem definido, mas toda modelagem envolve escolhas que impactam no resultado final.
+
+- **Separação da Camada de Serviço**:
+  Gosto da abordagem de centralizar todas as conexões em um único lugar. Dessa forma, o projeto garante que todas as integrações sigam o mesmo padrão, o que facilita para o desenvolvedor entender o fluxo e a estrutura do projeto sem se perder.
+
+  - **Uso Intensivo do TypeScript**:
+  Um dos maiores problemas do JavaScript é, de fato, a falta de tipagem (um entre muitos, haha). O uso intensivo do TypeScript garante que tudo esteja bem tipado, evitando os famosos problemas de "undefined", além de facilitar o desenvolvimento. O foco é aproveitar ao máximo os recursos do TypeScript, especialmente ao trabalhar com tipos dinâmicos e argumentos, tornando o sistema mais flexível e escalável.
+
+
 
 
 
